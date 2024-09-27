@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Articles</title>
+    <link rel='stylesheet' href='/webjars/bootstrap/5.3.3/css/bootstrap.min.css'>
+</head>
+<body>
+
+<div class="container bg-body-tertiary">
+    <div class="row px-4 py-5 text-center" >
+        <h1 class="display-5 fw-bold text-body-emphasis">Articles</h1>
+    </div>
+
+    <div class="row">
+        <form method="GET" class="g-3">
+            <div class="mb-2">
+                <input type="search" id="search" class="form-control form-control-sm" placeholder="Search..." name="q"
+                       th:value="${q}"/>
+            </div>
+            <div class="mb-1">
+                <button type="submit" class="btn btn-primary mb-3">Search</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <div class="py-2">
+            <div class="row row-cols-1 ">
+                <div class="col py-2" th:each="article: ${articles}">
+                    <div  class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 th:text="${article.titel}" class="card-title"></h5>
+                            <h6 th:text="${article.author}" class="card-subtitle mb-2 text-muted"></h6>
+                            <p th:text="${article.content}" class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row py-5">
+            <h3>Add Article</h3>
+            <form action="#" method="POST" th:action="@{/}" th:object="${newArticle}">
+                <div class="mb-3">
+                    <label for="titel-field" class="form-label">Titel</label>
+                    <input type="text" class="form-control form-control-lg" id="titel-field" placeholder="New Article"
+                           th:field="*{titel}">
+                </div>
+                <div class="mb-3">
+                    <label for="content-field" class="form-label">Content</label>
+                    <textarea class="form-control" id="content-field" rows="5" th:field="*{content}"
+                              placeholder="Lorem ipsum..."></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="author-field" class="form-label">Author</label>
+                    <input type="text" class="form-control" id="author-field" placeholder="Your Name"
+                           th:field="*{author}">
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary mb-3">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
